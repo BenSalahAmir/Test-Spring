@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface DetailFactureRepository extends JpaRepository<DetailFacture, Long> {
-    public List<DetailFacture> findDetailFactureByFacture(Facture f);
+    public List<DetailFacture>findDetailFactureByFacture(Facture f);
 }

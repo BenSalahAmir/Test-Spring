@@ -47,9 +47,9 @@ public class IFournisseurImp implements IFournisseur{
         Fourniseur fourniseur=fournisseurRepository.findById(fournisseurId).orElse(null);
         Produit produit=produitRepository.findById(produitId).orElse(null);
         if (fourniseur!=null && produit!=null){
-           // fournisseurRepository.getone(fournisseurId).get().getEtudiant().add(getone(produitId).get());
-            //System.out.println("second");
-            //fournisseurRepository.save(getone(produitId).get());
+
+            produit.getFournisseurs().add(fourniseur);
+            produitRepository.save(produit);
 
         }
 

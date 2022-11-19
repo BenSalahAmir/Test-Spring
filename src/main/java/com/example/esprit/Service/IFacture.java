@@ -1,8 +1,10 @@
 package com.example.esprit.Service;
 
+import com.example.esprit.Entity.CategorieClient;
 import com.example.esprit.Entity.Client;
 import com.example.esprit.Entity.Facture;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IFacture {
@@ -14,4 +16,6 @@ public interface IFacture {
     public Facture getone(Long id);
     public List<Facture> getFacturesByClient(Long idClient);
     public Facture addFacture(Facture f, Long idClient);
+    public float getChiffreAffaireParCategorieClient(CategorieClient categorieClient,
+                                                     Date startDate, Date endDate);
 }

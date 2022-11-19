@@ -29,6 +29,7 @@ public class Facture implements Serializable {
     @ManyToOne
     private Client client;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "facture")
     private Set<DetailFacture> detailFactures;
 

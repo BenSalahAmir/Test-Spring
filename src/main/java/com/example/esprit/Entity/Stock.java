@@ -22,7 +22,6 @@ public class Stock implements Serializable {
     private Integer qteStock;
     private Integer qteMin;
     private String libelleStock;
-
-    @OneToMany(mappedBy = "stock")
+    @OneToMany(mappedBy = "stock",cascade = CascadeType.PERSIST)
     private Set<Produit> produits;
 }

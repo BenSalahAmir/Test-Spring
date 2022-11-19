@@ -33,7 +33,7 @@ public class Produit implements Serializable {
     private Stock stock;
     @ManyToOne
     private Rayon rayon;
-
+    @JsonBackReference
     @ManyToMany
     private Set<Fourniseur>fournisseurs;
 

@@ -21,6 +21,6 @@ public class Rayon implements Serializable {
     private String codeRayon;
     private String libelleRayon;
 
-    @OneToMany(mappedBy = "rayon")
+    @OneToMany(mappedBy = "rayon",cascade = CascadeType.PERSIST)
     private Set<Produit> produits;
 }

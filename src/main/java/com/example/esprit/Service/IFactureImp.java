@@ -1,5 +1,6 @@
 package com.example.esprit.Service;
 
+import com.example.esprit.Entity.CategorieClient;
 import com.example.esprit.Entity.Client;
 import com.example.esprit.Entity.DetailFacture;
 import com.example.esprit.Entity.Facture;
@@ -10,6 +11,8 @@ import com.example.esprit.Repository.FournisseurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Service
 public class IFactureImp implements IFacture{
@@ -27,7 +30,10 @@ public class IFactureImp implements IFacture{
 
     @Override
     public void delete(Long id) {
-        factureRepository.deleteById(id);
+        Facture facture = factureRepository.findById(id).orElse(null);
+        if (!facture.isActive()) {
+            factureRepository.deleteById(id);
+        }
     }
 
     @Override
@@ -37,11 +43,13 @@ public class IFactureImp implements IFacture{
 
     @Override
     public List<Facture> getall() {
+
         return factureRepository.findAll();
     }
 
     @Override
     public Facture getone(Long id) {
+
         return factureRepository.findById(id).orElse(null);
     }
 
@@ -50,6 +58,7 @@ public class IFactureImp implements IFacture{
         Client c=cientRepository.findById(idClient).orElse(null);
         return factureRepository.findFactureByClient(c);
     }
+
     @Override
     public Facture addFacture(Facture f, Long idClient) {
         List<DetailFacture> detailFactures=detailFactureRepository.findDetailFactureByFacture(f);
@@ -63,4 +72,22 @@ public class IFactureImp implements IFacture{
         f.setMontantRemise(montRem);
         return factureRepository.save(f);
     }
+
+    @Override
+    public float getChiffreAffaireParCategorieClient(CategorieClient categorieClient, Date startDate, Date endDate) {
+        List<Facture> factures = new ArrayList<>();
+        float ca =0;
+        for (CategorieClient categorie : CategorieClient.values()){
+            factures = factureRepository.findByClientCategorieClientAndDateFactureBetween(categorie, startDate, endDate);
+            for( Facture f : factures){
+                 ca+=f.getMontantFacture();
+                 return ca;
+            }
+        }
+
+
+        return 0;
+    }
+
+
 }

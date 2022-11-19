@@ -42,9 +42,11 @@ public class FactureControlleur {
        // service.getFacturesByClient(idClient);
         return new ResponseEntity<>(service.getFacturesByClient(idClient),HttpStatus.OK);
     }
+
     @PostMapping("/addFacture/{idClient}")
-    public Facture addFacture(@RequestBody Facture f,@PathVariable Long idClient){
-        return service.addFacture(f,idClient);
+    public ResponseEntity<?> addFacture(@RequestBody Facture f,@PathVariable Long idClient){
+        return new ResponseEntity<>( service.addFacture(f,idClient), HttpStatus.CREATED);
     }
+
 
 }
